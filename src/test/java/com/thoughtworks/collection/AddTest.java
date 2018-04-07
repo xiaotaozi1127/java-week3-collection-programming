@@ -81,7 +81,7 @@ public class AddTest {
     }
 
     @Test
-    public void should_return_median_of_even_index() {
+    public void should_return_median_of_even_element() {
         //求数组中所有偶数组成的数组的中位数
         Integer[] array = new Integer[]{1, 2, 3, 4, 5};
         List<Integer> arrayList = Arrays.asList(array);
@@ -91,7 +91,7 @@ public class AddTest {
     }
 
     @Test
-    public void should_return_average_of_even_index() {
+    public void should_return_average_of_even_element() {
         //求数组中所有偶数的平均数
         Integer[] array = new Integer[]{1, 2, 3, 4, 5};
         List<Integer> arrayList = Arrays.asList(array);
@@ -102,17 +102,17 @@ public class AddTest {
 
     @Test
     public void should_return_whether_include_special_element() {
-        // 求数组中所有偶数组成的数组是否包含某特定的数specialElment
+        // 求数组中所有偶数组成的数组是否包含某特定的数specialElement
         Integer[] array = new Integer[]{1, 2, 3, 4, 5};
         List<Integer> arrayList = Arrays.asList(array);
 
         Add add = new Add();
 
-        Integer existedElment = 3;
-        assertThat(add.isIncludedInEvenIndex(arrayList, existedElment)).isEqualTo(false);
+        Integer existedElement = 3;
+        assertThat(add.isIncludedInEvenIndex(arrayList, existedElement)).isEqualTo(false);
 
-        Integer unexistedElment = 2;
-        assertThat(add.isIncludedInEvenIndex(arrayList, unexistedElment)).isEqualTo(true);
+        Integer unExistedElement = 2;
+        assertThat(add.isIncludedInEvenIndex(arrayList, unExistedElement)).isEqualTo(true);
     }
 
     @Test
