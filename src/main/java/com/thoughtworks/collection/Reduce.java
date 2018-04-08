@@ -38,15 +38,21 @@ public class Reduce {
     }
 
     public int getFirstEven() {
-        throw new NotImplementedException();
+        return this.arrayList.stream().filter(i -> i % 2 == 0).findFirst().get();
     }
 
     public int getIndexOfFirstEven() {
-        throw new NotImplementedException();
+        return this.arrayList.indexOf(this.getFirstEven());
     }
 
     public boolean isEqual(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        if(arrayList.size() != this.arrayList.size())
+            return false;
+        return this.arrayList.stream()
+                .filter(i -> !arrayList.contains(i))
+                .collect(Collectors.toList())
+                .size() > 0 ?
+                false: true;
     }
 
     //实现接口SingleLink，然后再此函数内使用
@@ -65,10 +71,11 @@ public class Reduce {
     }
 
     public int getLastOdd() {
-        throw new NotImplementedException();
+        List<Integer> collect = this.arrayList.stream().filter(i -> i % 2 != 0).collect(Collectors.toList());
+        return collect.get(collect.size() - 1);
     }
 
     public int getIndexOfLastOdd() {
-        throw new NotImplementedException();
+        return this.arrayList.lastIndexOf(getLastOdd());
     }
 }

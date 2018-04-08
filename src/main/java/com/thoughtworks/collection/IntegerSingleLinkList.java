@@ -1,6 +1,6 @@
 package com.thoughtworks.collection;
 
-public class IntegerSingleLinkList<T> implements SingleLink {
+public class IntegerSingleLinkList<T> implements SingleLink<T> {
     protected Node<T> start;
     protected Node<T> end ;
     public int size ;
@@ -36,7 +36,7 @@ public class IntegerSingleLinkList<T> implements SingleLink {
     }
 
     @Override
-    public void addHeadPointer(Object item) {
+    public void addHeadPointer(T item) {
         Node nptr = new Node(item, null);
         size++ ;
         if(start == null)
@@ -52,7 +52,7 @@ public class IntegerSingleLinkList<T> implements SingleLink {
     }
 
     @Override
-    public void addTailPointer(Object item) {
+    public void addTailPointer(T item) {
         Node nptr = new Node(item, null);
         size++ ;
         if(start == null)
