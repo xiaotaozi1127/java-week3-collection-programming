@@ -3,6 +3,7 @@ package com.thoughtworks.collection;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Reduce {
 
@@ -13,19 +14,27 @@ public class Reduce {
     }
 
     public int getMaximum() {
-        throw new NotImplementedException();
+        return this.arrayList.stream().max(Integer::compare).get();
     }
 
     public double getMinimum() {
-        throw new NotImplementedException();
+        return this.arrayList.stream().min(Integer::compare).get();
     }
 
     public double getAverage() {
-        throw new NotImplementedException();
+        Integer sum = 0;
+        for(Integer i : arrayList){
+            sum += i;
+        }
+        return (double)sum / this.arrayList.size();
     }
 
     public double getOrderedMedian() {
-        throw new NotImplementedException();
+        List<Integer> sort = this.arrayList.stream().sorted().collect(Collectors.toList());
+        if(sort.size() % 2 != 0) {
+            return sort.get(sort.size() / 2);
+        }
+        return (double)(sort.get(sort.size() / 2 - 1) + sort.get(sort.size() / 2)) / 2;
     }
 
     public int getFirstEven() {
@@ -42,7 +51,17 @@ public class Reduce {
 
     //实现接口SingleLink，然后再此函数内使用
     public Double getMedianInLinkList(SingleLink singleLink) {
-        throw new NotImplementedException();
+        singleLink = new IntegerSingleLinkList<Integer>();
+        for(Integer i : this.arrayList){
+            singleLink.addTailPointer(i);
+        }
+        int size = singleLink.size();
+        if(size % 2 == 0){
+            Integer node = (Integer) singleLink.getNode(size / 2 - 1);
+            Integer node1 = (Integer) singleLink.getNode(size / 2);
+            return (double)(node + node1) / 2;
+        }
+        return Double.parseDouble(singleLink.getNode(size / 2).toString());
     }
 
     public int getLastOdd() {
