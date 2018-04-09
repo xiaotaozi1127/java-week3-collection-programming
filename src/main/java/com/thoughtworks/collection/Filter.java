@@ -1,9 +1,7 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Filter {
@@ -23,7 +21,10 @@ public class Filter {
     }
 
     public List<Integer> getCommonElements(List<Integer> firstList, List<Integer> secondList) {
-        return firstList.stream().filter(i -> secondList.contains(i)).collect(Collectors.toList());
+//        return firstList.stream().filter(i -> secondList.contains(i)).collect(Collectors.toList());
+        List<Integer> list = new ArrayList<>(firstList);
+        list.retainAll(secondList);
+        return list;
     }
 
     public List<Integer> getDifferentElements() {

@@ -1,6 +1,7 @@
 package com.thoughtworks.collection;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,11 +31,7 @@ public class Add {
     }
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
-        Integer sum = 0;
-        for(Integer i : arrayList){
-            sum += i * 3 + 2;
-        }
-        return sum;
+        return arrayList.stream().mapToInt(n -> n * 3 + 2).sum();
     }
 
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
@@ -47,13 +44,7 @@ public class Add {
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
-        Integer sum = 0;
-        for(Integer i : arrayList){
-            if(i % 2 != 0){
-                sum += i * 3 + 5;
-            }
-        }
-        return sum;
+        return arrayList.stream().filter(n -> n % 2 != 0).mapToInt(n -> n * 3 + 5).sum();
     }
 
     public double getMedianOfEvenIndex(List<Integer> arrayList) {
@@ -82,8 +73,8 @@ public class Add {
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
         return arrayList.stream()
-                .filter(i -> i % 2 == 0 && i == specialElment)
-                .collect(Collectors.toList()).size() > 0;
+                .filter(i -> i % 2 == 0)
+                .anyMatch( i-> i == specialElment);
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
@@ -91,18 +82,23 @@ public class Add {
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        return arrayList.stream().sorted((o1, o2) -> {
-            if(o1 % 2 == 0 && o2 % 2 == 0){
-                return o1 > o2 ? 1 : -1;
-            }
-            if(o1 % 2 == 0 && o2 % 2 != 0){
-                return -1;
-            }
-            if(o1 % 2 != 0 && o2 % 2 == 0){
-                return 1;
-            }
-            return o1 > o2 ? -1 : 1;
-        }).collect(Collectors.toList());
+//        return arrayList.stream().sorted((o1, o2) -> {
+//            if(o1 % 2 == 0 && o2 % 2 == 0){
+//                return o1 > o2 ? 1 : -1;
+//            }
+//            if(o1 % 2 == 0 && o2 % 2 != 0){
+//                return -1;
+//            }
+//            if(o1 % 2 != 0 && o2 % 2 == 0){
+//                return 1;
+//            }
+//            return o1 > o2 ? -1 : 1;
+//        }).collect(Collectors.toList());
+
+        List<Integer> evenList = arrayList.stream().filter(n -> n % 2 == 0).sorted().collect(Collectors.toList());
+        List<Integer> oddList = arrayList.stream().filter(n -> (n - 1) % 2 == 0).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        evenList.addAll(oddList);
+        return evenList;
     }
 
     public List<Integer> getProcessedList(List<Integer> arrayList) {

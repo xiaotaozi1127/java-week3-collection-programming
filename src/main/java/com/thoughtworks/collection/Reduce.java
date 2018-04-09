@@ -1,7 +1,6 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,19 +13,22 @@ public class Reduce {
     }
 
     public int getMaximum() {
-        return this.arrayList.stream().max(Integer::compare).get();
+//        return this.arrayList.stream().max(Integer::compare).get();
+        return Collections.max(arrayList);
     }
 
     public double getMinimum() {
-        return this.arrayList.stream().min(Integer::compare).get();
+//        return this.arrayList.stream().min(Integer::compare).get();
+        return Collections.min(arrayList);
     }
 
     public double getAverage() {
-        Integer sum = 0;
-        for(Integer i : arrayList){
-            sum += i;
-        }
-        return (double)sum / this.arrayList.size();
+//        Integer sum = 0;
+//        for(Integer i : arrayList){
+//            sum += i;
+//        }
+//        return (double)sum / this.arrayList.size();
+        return (double)arrayList.stream().mapToInt(n -> n).sum() / arrayList.size();
     }
 
     public double getOrderedMedian() {
@@ -46,13 +48,14 @@ public class Reduce {
     }
 
     public boolean isEqual(List<Integer> arrayList) {
-        if(arrayList.size() != this.arrayList.size())
-            return false;
-        return this.arrayList.stream()
-                .filter(i -> !arrayList.contains(i))
-                .collect(Collectors.toList())
-                .size() > 0 ?
-                false: true;
+//        if(arrayList.size() != this.arrayList.size())
+//            return false;
+//        return this.arrayList.stream()
+//                .filter(i -> !arrayList.contains(i))
+//                .collect(Collectors.toList())
+//                .size() > 0 ?
+//                false: true;
+        return this.arrayList.toString().equals(arrayList.toString());
     }
 
     //实现接口SingleLink，然后再此函数内使用
